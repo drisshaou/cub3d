@@ -6,7 +6,7 @@
 /*   By: dhaouhao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 01:07:49 by dhaouhao          #+#    #+#             */
-/*   Updated: 2020/03/29 20:16:45 by dhaouhao         ###   ########.fr       */
+/*   Updated: 2020/03/30 16:35:28 by dhaouhao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,21 @@ void	rotate(t_c3d *t)
 {
 	double	old_xdir;
 	double	old_xplane;
-	double	_cos;
-	double	_sin;
+	double	cosi;
+	double	sinu;
 	double	m;
 
 	old_xdir = t->dir.x;
 	old_xplane = t->pln.x;
 	m = t->rtr ? -1. : 1.;
-	_cos = cos(m * t->rts);
-	_sin = sin(m * t->rts);
+	cosi = cos(m * t->rts);
+	sinu = sin(m * t->rts);
 	if (t->rtr || t->rtl)
 	{
-		t->dir.x = t->dir.x * _cos - t->dir.y * _sin;
-		t->dir.y = old_xdir * _sin + t->dir.y * _cos;
-		t->pln.x = t->pln.x * _cos - t->pln.y * _sin;
-		t->pln.y = old_xplane * _sin + t->pln.y * _cos;
+		t->dir.x = t->dir.x * cosi - t->dir.y * sinu;
+		t->dir.y = old_xdir * sinu + t->dir.y * cosi;
+		t->pln.x = t->pln.x * cosi - t->pln.y * sinu;
+		t->pln.y = old_xplane * sinu + t->pln.y * cosi;
 	}
 }
 
@@ -56,17 +56,17 @@ void	move_horizontal(t_c3d *t)
 {
 	double	new_xdir;
 	double	new_ydir;
-	double	_cos;
-	double	_sin;
+	double	cosi;
+	double	sinu;
 	double	m;
 
 	if (t->mvr || t->mvl)
 	{
 		m = t->mvl ? (1. + t->mvs) : -(1. + t->mvs);
-		_cos = cos(M_PI / 2);
-		_sin = sin(M_PI / 2);
-		new_xdir = m * (t->dir.x * _cos - t->dir.y * _sin);
-		new_ydir = m * (t->dir.x * _sin + t->dir.y * _cos);
+		cosi = cos(M_PI / 2);
+		sinu = sin(M_PI / 2);
+		new_xdir = m * (t->dir.x * cosi - t->dir.y * sinu);
+		new_ydir = m * (t->dir.x * sinu + t->dir.y * cosi);
 		if (t->map[(int)(t->pos.x + new_xdir * t->mvs)][(int)t->pos.y] == '0')
 			t->pos.x += new_xdir * t->mvs;
 		if (t->map[(int)t->pos.x][(int)(t->pos.y + new_ydir * t->mvs)] == '0')

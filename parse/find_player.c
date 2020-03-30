@@ -6,7 +6,7 @@
 /*   By: dhaouhao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/15 23:07:02 by dhaouhao          #+#    #+#             */
-/*   Updated: 2020/03/20 06:49:51 by dhaouhao         ###   ########.fr       */
+/*   Updated: 2020/03/30 04:00:15 by dhaouhao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	find_player(char ***map, t_double *pos, int *orienter)
 	int		nb;
 
 	*pos = (t_double){0, 0, 0};
-	if (!(nb = 0) && map != NULL && (s.x = - 1))
+	s.x = -1;
+	if (!(nb = 0) && map != NULL)
 		while (++s.x < ft_get_tab_size(*map) && (s.y = -1))
 			while (++s.y < (int)ft_strlen((*map)[s.x]))
 			{
@@ -36,6 +37,6 @@ int	find_player(char ***map, t_double *pos, int *orienter)
 	else if (nb == 0)
 		return (exit_error(CANT_FIND_PLAYER));
 	else if (nb > 1)
-		return(exit_error(TOO_MUCH_PLAYERS));
+		return (exit_error(TOO_MUCH_PLAYERS));
 	return (nb);
 }

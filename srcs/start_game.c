@@ -6,7 +6,7 @@
 /*   By: dhaouhao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 01:37:16 by dhaouhao          #+#    #+#             */
-/*   Updated: 2020/03/29 20:26:22 by dhaouhao         ###   ########.fr       */
+/*   Updated: 2020/03/30 17:06:36 by dhaouhao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	start_game(t_c3d *t)
 	mlx_hook(t->win, 2, 0, keypress, t);
 	mlx_hook(t->win, 3, 0, keyrelease, t);
 	load_xpm(t);
-	// raycast(t);
 	mlx_loop_hook(t->mlx, move, t);
 	mlx_loop(t->mlx);
 }

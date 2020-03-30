@@ -6,53 +6,53 @@
 /*   By: dhaouhao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/15 23:20:20 by dhaouhao          #+#    #+#             */
-/*   Updated: 2020/03/20 06:49:51 by dhaouhao         ###   ########.fr       */
+/*   Updated: 2020/03/30 17:18:06 by dhaouhao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		is_visited(t_path ***path, int x, int y, int i)
+int		is_visited(t_path ***path, t_int d, int i)
 {
 	while (i > 0 && i-- > 0)
-		if ((*path)[i]->x == x && (*path)[i]->y == y)
+		if ((*path)[i]->x == d.x && (*path)[i]->y == d.y)
 			return (1);
 	return (0);
 }
 
-int		try_player_pos(char ***map, t_path ***path, int x, int y, int i)
+int		try_pos(char ***map, t_path ***path, t_int d, int i)
 {
-	return (x >= 0 && (x < ft_get_tab_size(*map))
-		&& y >= 0 && y < (int)ft_strlen((*map)[x])
-		&& !is_visited(path, x, y, i)
-		&& (*map)[x][y] != '1');
+	return (d.x >= 0 && (d.x < ft_get_tab_size(*map))
+		&& d.y >= 0 && d.y < (int)ft_strlen((*map)[d.x])
+		&& !is_visited(path, d, i)
+		&& (*map)[d.x][d.y] != '1');
 }
 
-int		get_ways(char ***map, t_path ***path, t_int c, int i)
+int		nb_ways(char ***map, t_path ***path, t_int c, int i)
 {
-	int	nb;
+	int		nb;
 
 	nb = 0;
-	if (try_player_pos(map, path, c.x, c.y - 1, i))
+	if (try_pos(map, path, tni_t(c.x, c.y - 1), i))
 		nb++;
-	if (try_player_pos(map, path, c.x + 1, c.y, i))
+	if (try_pos(map, path, tni_t(c.x + 1, c.y), i))
 		nb++;
-	if (try_player_pos(map, path, c.x, c.y + 1, i))
+	if (try_pos(map, path, tni_t(c.x, c.y + 1), i))
 		nb++;
-	if (try_player_pos(map, path, c.x - 1, c.y, i))
+	if (try_pos(map, path, tni_t(c.x - 1, c.y), i))
 		nb++;
 	return (nb);
 }
 
 void	move_to(char ***map, t_path ***path, t_int *c, int i)
 {
-	if (try_player_pos(map, path, c->x, c->y - 1, i))
+	if (try_pos(map, path, tni_t(c->x, c->y - 1), i))
 		(c->y)--;
-	else if (try_player_pos(map, path, c->x + 1, c->y, i))
+	else if (try_pos(map, path, tni_t(c->x + 1, c->y), i))
 		(c->x)++;
-	else if (try_player_pos(map, path, c->x, c->y + 1, i))
+	else if (try_pos(map, path, tni_t(c->x, c->y + 1), i))
 		(c->y)++;
-	else if (try_player_pos(map, path, c->x - 1, c->y, i))
+	else if (try_pos(map, path, tni_t(c->x - 1, c->y), i))
 		(c->x)--;
 }
 
@@ -66,7 +66,7 @@ int		move_back(char ***map, t_path ***path, t_int *c, int i)
 	while (j > 0 && --j >= 0)
 	{
 		*c = (t_int){(*path)[j]->x, (*path)[j]->y};
-		if ((nb = get_ways(map, path, *c, i)) >= 1)
+		if ((nb = nb_ways(map, path, *c, i)) >= 1)
 			break ;
 	}
 	return ((j == 0 && nb == 0) ? 0 : 1);

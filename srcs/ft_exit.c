@@ -6,7 +6,7 @@
 /*   By: dhaouhao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 01:20:38 by dhaouhao          #+#    #+#             */
-/*   Updated: 2020/03/29 19:16:54 by dhaouhao         ###   ########.fr       */
+/*   Updated: 2020/03/30 17:07:11 by dhaouhao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		ft_exit(t_c3d *t)
 	if (t->bufz != NULL)
 		free(t->bufz);
 	free_conf(t);
-	system ("leaks cub3d");
+	system("leaks cub3d");
 	exit(1);
 	return (0);
 }

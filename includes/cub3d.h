@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dhaouhao <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/03/30 17:08:51 by dhaouhao          #+#    #+#             */
+/*   Updated: 2020/03/30 17:09:45 by dhaouhao         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 # ifndef CUB3D_H
 # define CUB3D_H
 
@@ -59,7 +71,7 @@ typedef struct	s_sprite
 
 typedef struct	s_raysprite
 {
-	t_int		_tx;
+	t_int		txpos;
 	t_int		drws;
 	t_int		drwe;
 	t_double	sprite;
@@ -104,9 +116,8 @@ typedef struct	s_c3d
 	int			endian;
 	int			sl;
 	t_int		mp;
-	t_int		_t;
 	t_int		stp;
-	t_int		_tx;
+	t_int		txpos;
 	int			color;
 	int			x;
 	int			hit;
@@ -139,17 +150,13 @@ typedef struct	s_c3d
 	double		shadedist;
 }				t_c3d;
 
-typedef struct	s_bfh
+typedef struct	s_bmp
 {
 	unsigned char	bitmap_type[2];
 	int				file_size;
 	short int		reserved1;
 	short int		reserved2;
 	unsigned int	offset_bits;
-}				t_bfh;
-
-typedef struct	s_bih
-{
 	unsigned int	size_header;
 	unsigned int	width;
 	unsigned int	height;
@@ -161,7 +168,7 @@ typedef struct	s_bih
 	unsigned int	ppm_y;
 	unsigned int	clr_used;
 	unsigned int	clr_important;
-}				t_bih;
+}				t_bmp;
 
 int				check_conf(t_c3d **t);
 int				exit_error(const char *error);
@@ -174,12 +181,10 @@ int				find_player(char ***map, t_double *pos, int *orienter);
 int				check_map(char ***map, t_double pos);
 int				track_map_borders(char ***map, t_path ***path, t_double pos);
 int				is_inside(char ***map, t_int c);
-int				is_validated(char ***map, t_path ***path, t_int c,
-					t_double dest, int i);
-int				is_visited(t_path ***path, int x, int y, int i);
-int				try_player_pos(char ***map, t_path ***path, int x, int y,
-					int i);
-int				get_ways(char ***map, t_path ***path, t_int c, int i);
+int				is_visited(t_path ***path, t_int d, int i);
+t_int			tni_t(int x, int y);
+int				try_pos(char ***map, t_path ***path, t_int d, int i);
+int				nb_ways(char ***map, t_path ***path, t_int c, int i);
 int				move_back(char ***map, t_path ***path, t_int *c, int i);
 void			move_to(char ***map, t_path ***path, t_int *c, int i);
 void			free_conf(t_c3d *t);
@@ -207,7 +212,7 @@ void			init_orientation(t_c3d *t, char orient);
 void			raycast(t_c3d *t);
 int				shade_color(int color, double shadedist);
 void			draw_pxl(t_c3d *t, int x, int y);
-int				get_pxl_color(t_c3d *t, t_int _tx);
+int				get_pxl_color(t_c3d *t, t_int txpos);
 void			init_cast_walls(t_c3d *t);
 void			cast_walls(t_c3d *t);
 void			calc_side_dist(t_c3d *t);
@@ -223,12 +228,13 @@ void			calc_sprite_w_h(t_c3d *t, t_raysprite *s);
 void			draw_sprite(t_c3d *t, t_raysprite *s, int i);
 void			free_sprite(t_c3d *t, t_sprite **sprite);
 void			create_bmp(t_c3d *t);
-void			init_bmp_header(t_c3d *t, t_bfh *bfh, t_bih *bih);
-void			fill_bmp_header(int fd, t_bfh *bfh, t_bih *bih);
+void			init_bmp_header(t_c3d *t, t_bmp *bmp);
+void			fill_bmp_header(int fd, t_bmp *bmp);
 void			draw_small_map(t_c3d *t);
-void			draw_small_background(t_c3d *t, int rows, int cols, t_int c, int l);
-void			draw_small_walls(t_c3d *t, int rows, int cols, t_int c, int l);
-void			draw_small_position(t_c3d *t, int rows, int cols, int l);
-void			draw_small_sprites(t_c3d *t, int rows, int cols, t_int c, int l);
+void			draw_small_background(t_c3d *t, t_int max, t_int c, int l);
+void			draw_small_walls(t_c3d *t, t_int max, t_int c, int l);
+void			draw_small_position(t_c3d *t, t_int max, int l);
+void			draw_small_sprites(t_c3d *t, t_int max, t_int c, int l);
+
 
 #endif
