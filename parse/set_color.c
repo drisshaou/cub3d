@@ -6,7 +6,7 @@
 /*   By: dhaouhao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 04:17:17 by dhaouhao          #+#    #+#             */
-/*   Updated: 2020/03/31 00:30:15 by dhaouhao         ###   ########.fr       */
+/*   Updated: 2020/03/31 00:44:40 by dhaouhao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int	set_color(t_c3d *t, char **split)
 	int		rgb_i;
 	int		ret;
 
-	ret = 1;
-	if (ft_get_tab_size((rgb = ft_split(split[1], ','))) == 3 && (i = -1))
+	ret = (rgb = ft_split(split[1], ',')) == 3 ? 1 : 0;
+	if (ft_get_tab_size((rgb)) == 3 && (i = -1))
 	{
 		while (++i < 3 && (j = -1))
 			while (rgb[i][++j])
