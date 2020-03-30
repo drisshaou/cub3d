@@ -6,7 +6,7 @@
 /*   By: dhaouhao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/15 23:14:10 by dhaouhao          #+#    #+#             */
-/*   Updated: 2020/03/30 17:14:35 by dhaouhao         ###   ########.fr       */
+/*   Updated: 2020/03/30 23:29:50 by dhaouhao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ int		check_map(char ***map, t_double pos)
 		while (++x < max.x)
 			if (max.y < (int)ft_strlen((*map)[x]))
 				max.y = (int)ft_strlen((*map)[x]);
-	if ((x = - 1) && !(path = malloc(sizeof(t_path*) * (max.x * max.y))))
+	x = -1;
+	if (!(path = malloc(sizeof(t_path*) * (max.x * max.y))))
 		return (exit_error(CANT_CHECK_MAP));
 	while (++x < max.x * max.y)
 		if (!(path[x] = malloc(sizeof(t_path))))
