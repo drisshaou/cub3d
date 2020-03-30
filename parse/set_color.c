@@ -6,7 +6,7 @@
 /*   By: dhaouhao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 04:17:17 by dhaouhao          #+#    #+#             */
-/*   Updated: 2020/03/31 01:01:08 by dhaouhao         ###   ########.fr       */
+/*   Updated: 2020/03/31 01:07:11 by dhaouhao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	fill_color(t_c3d *t, char *str, char **rgb)
 	rgb_i = rgb_int(ft_atoi(rgb[0]), ft_atoi(rgb[1]), ft_atoi(rgb[2]));
 	t->flr_color = !ft_strcmp(str, "F") ? rgb_i : t->flr_color;
 	t->cl_color = !ft_strcmp(str, "C") ? rgb_i : t->cl_color;
-
 }
 
 int		set_color(t_c3d *t, char **split)

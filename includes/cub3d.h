@@ -6,11 +6,11 @@
 /*   By: dhaouhao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 17:08:51 by dhaouhao          #+#    #+#             */
-/*   Updated: 2020/03/30 17:09:45 by dhaouhao         ###   ########.fr       */
+/*   Updated: 2020/03/31 01:11:07 by dhaouhao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef CUB3D_H
+#ifndef CUB3D_H
 # define CUB3D_H
 
 # define CANT_RD_CUB "Can't read the .cub file\n"
@@ -39,8 +39,8 @@
 # include <math.h>
 # include <stdio.h>
 
-# define tx_w 64
-# define tx_h 64
+# define TX_W 64
+# define TX_H 64
 
 typedef struct	s_int
 {
@@ -189,6 +189,7 @@ int				move_back(char ***map, t_path ***path, t_int *c, int i);
 void			move_to(char ***map, t_path ***path, t_int *c, int i);
 void			free_conf(t_c3d *t);
 int				fill_map(char ***map, char *line);
+void			fill_color(t_c3d *t, char *str, char **rgb);
 int				set_color(t_c3d *t, char **split);
 int				fill_tex_tab(char ***tab, char *tmp, int index);
 void			reorder_tex_tab(char ***tab, int *indexes, int i);
@@ -235,6 +236,5 @@ void			draw_small_background(t_c3d *t, t_int max, t_int c, int l);
 void			draw_small_walls(t_c3d *t, t_int max, t_int c, int l);
 void			draw_small_position(t_c3d *t, t_int max, int l);
 void			draw_small_sprites(t_c3d *t, t_int max, t_int c, int l);
-
 
 #endif

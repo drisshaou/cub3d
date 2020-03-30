@@ -6,7 +6,7 @@
 /*   By: dhaouhao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 01:21:21 by dhaouhao          #+#    #+#             */
-/*   Updated: 2020/03/29 20:04:56 by dhaouhao         ###   ########.fr       */
+/*   Updated: 2020/03/31 01:11:07 by dhaouhao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	load_xpm(t_c3d *t)
 	int	b;
 	int	i;
 
-	a = tx_w;
-	b = tx_h;
+	a = TX_W;
+	b = TX_H;
 	i = -1;
 	while (++i < ft_get_tab_size(t->tex_tab))
 	{
